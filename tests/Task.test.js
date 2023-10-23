@@ -22,3 +22,11 @@ test('User should be able to fetch all its documents', async () => {
   expect(response.body.length).toBe(2);
 });
 
+test('Non-existent user should not be able to fetch the documents', async () => {
+  const response = await request(app)
+    .get('/users/documents')
+    .set('Authorization', `Bearer ${firstAuthenticatedUser.tokens[0].token}`)
+    .send()
+    .expect(401);
+});
+
