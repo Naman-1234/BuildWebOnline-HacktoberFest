@@ -56,3 +56,7 @@ test('Authenticated User should be able to log out ', async () => {
     .send()
     .expect(201);
 });
+
+test('Non-existent User should not be able to log out ', async () => {
+  await request(app).get('/users/logout').send().expect(401);
+});
