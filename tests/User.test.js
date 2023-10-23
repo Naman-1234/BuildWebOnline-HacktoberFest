@@ -28,7 +28,7 @@ test('should sign up a user', async () => {
     })
     .expect(201);
 });
-//CHecking if who is  registered on our website could login
+//Checking if who is registered on our website could login
 test('Authenticated User should be able to log in ', async () => {
   await request(app)
     .post('/users/login')
@@ -37,4 +37,14 @@ test('Authenticated User should be able to log in ', async () => {
       password: firstAuthenticatedUser.password,
     })
     .expect(200);
+});
+//Checking if who is not registered on our website could login
+test('Non-existent User should not be able to log in ', async () => {
+  await request(app)
+    .post('/users/login')
+    .send({
+      email: firstUnauthenticatedUser.email,
+      password: firstUnauthenticatedUser.password,
+    })
+    .expect(403);
 });
