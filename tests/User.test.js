@@ -60,3 +60,11 @@ test('Authenticated User should be able to log out ', async () => {
 test('Non-existent User should not be able to log out ', async () => {
   await request(app).get('/users/logout').send().expect(401);
 });
+
+test('Authenticated user should be able to fetch its profile', async () => {
+  await request(app)
+    .get('/users/me')
+    .set('Authorization', `Bearer ${firstAuthenticatedUser.tokens[0].token}`)
+    .send()
+    .expect(200);
+});
