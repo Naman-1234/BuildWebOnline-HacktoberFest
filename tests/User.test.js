@@ -68,3 +68,7 @@ test('Authenticated user should be able to fetch its profile', async () => {
     .send()
     .expect(200);
 });
+
+test('Non-existent user should not be able to get the profile pic', async () => {
+  await request(app).get('/users/me/avatar').send().expect(401);
+});
