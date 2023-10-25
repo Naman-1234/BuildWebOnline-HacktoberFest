@@ -30,3 +30,11 @@ test('Non-existent user should not be able to fetch the documents', async () => 
     .expect(401);
 });
 
+test('User should  be able to get a particular document', async () => {
+  const response = await request(app)
+    .get(`/users/documents/${firstUserDocument1._id}`)
+    .set('Authorization', `Bearer ${firstAuthenticatedUser.tokens[0].token}`)
+    .send()
+    .expect(200);
+});
+
